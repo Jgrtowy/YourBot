@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
+require("dotenv").config();
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -16,7 +16,7 @@ for (const file of commandFiles) {
 }
 
 client.once(Events.ClientReady, () => {
-	console.log('Ready!');
+	console.log(`Ready!`);
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -34,4 +34,4 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.login(token);
+client.login(process.env.TOKEN);
