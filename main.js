@@ -11,14 +11,14 @@ const client = new DiscordJS.Client({
 	    GatewayIntentBits.MessageContent,
 	    GatewayIntentBits.GuildMessages,
 	    GatewayIntentBits.GuildMessageReactions,
-	    GatewayIntentBits.GuildPresences,
+	//     GatewayIntentBits.GuildPresences,
 	    GatewayIntentBits.GuildMembers,
 	],
 });
 client.on("ready", async()=>{
 	const wok = new WOKCommands(client, {
 		commandsDir: path.join(__dirname, "commands"),
-		testServers: ["1040650205202227261"],
+		testServers: ["1040650205202227261", "980813190780841984"],
 		botOwners: ["315531146953752578","304961013202288651"],
 	});
 })
@@ -27,7 +27,7 @@ client.on("ready", async()=>{
 
 // const webhookClient = new WebhookClient({ url: "https://canary.discord.com/api/webhooks/1047519390150705162/L-2hDcWGov42wy8YwrfreZNNsKCJ6j1sIaorKzGRgI_sRJcBwjRwneTC-TLWisilmfmZ" });
 const webhookClient = new WebhookClient({ url: "https://canary.discord.com/api/webhooks/986957834942033990/qJgH2I3fKQxuDJzWaOJHZUTfqOi1jCcQaUCjVwsJelIZ6uTuuPnpsAeEb_OAgUdv30py" });
-const changelogWebhook = new WebhookClient({ url: "https://canary.discord.com/api/webhooks/1047519390150705162/L-2hDcWGov42wy8YwrfreZNNsKCJ6j1sIaorKzGRgI_sRJcBwjRwneTC-TLWisilmfmZ" });
+const changelogWebhook = new WebhookClient({ url: "https://canary.discord.com/api/webhooks/1047871573052371034/PDvSGZVGiwkhC2ouIZtXJOLrC_XbUs_m7NrRGFRSDmV0YgqWP5dt3zX5b2nqzhfadlfg" });
 
 const contextEmbed = new EmbedBuilder().setColor(0x8a00c2)
 	.setTitle(':wave: Greetings User!')
@@ -77,12 +77,9 @@ const changelogEmbed = new EmbedBuilder().setColor(0xb100cd)
 		- Deleted old "moses-pics" channel
 
 		> Bot changes
-		- Most important is that **bot has been saved!** :partying_face: 
 		- Changed embed style of daily quotes
 		- Now you can add Moses pictures on <#984114613106933770> with "/moses pics" commands (more info on <#1047230917078429816>)
 		- Tweaked overall functioning of bot
-
-		
 		`
 	)
 	.setTimestamp()
