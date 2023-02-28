@@ -53,7 +53,7 @@ module.exports = {
 		   5: "Competing in",
 	    };
  
-	    client.user.setActivity({ type, url: "https://www.twitch.tv/itsgino_", name: activity });
+	    client.user.setActivity({ type, url: "https://jgrtowy.xyz/", name: activity });
  
 	    if (interaction) {
 		   interaction.reply({
