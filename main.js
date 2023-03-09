@@ -1,13 +1,15 @@
 const path = require("path")
 const WOKCommands = require("wokcommands")
 const DiscordJS = require("discord.js")
+const { REST } = require("@discordjs/rest")
+const { Routes } = require("discord-api-types/v9")
 const {
   IntentsBitField,
   ActivityType,
   EmbedBuilder,
   WebhookClient,
   Guild,
-  Partials,
+  Partials, 
 } = DiscordJS
 require("dotenv").config()
 const axios = require("axios")
@@ -28,6 +30,10 @@ client.on("ready", async () => {
     commandsDir: path.join(__dirname, "commands"),
     testServers: ["980813190780841984", "1040650205202227261"],
     botOwners: ["315531146953752578", "304961013202288651"],
+    mongoUri: process.env.MONGO_URI || "",
+    disabledDefaultCommands: [
+      'prefix', 'language', 'command', 'requiredRole', 'requiredChannel', 'requiredPermissions'
+    ],
   })
   try {
     client.user.setStatus('idle');
@@ -179,4 +185,4 @@ client.on("messageCreate", async (message) => {
 
 
 client.login(process.env.TOKEN)
-console.log("Yo(ur) bot it now running!");
+console.log("🎉🎉🎉 Yo(ur) bot is now running!");

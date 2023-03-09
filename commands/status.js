@@ -1,3 +1,5 @@
+const { CommandType } = require("wokcommands");
+
 module.exports = {
 	category: "main",
 	description: "Change the bot status",
@@ -37,7 +39,7 @@ module.exports = {
 		   type: 3,
 	    },
 	],
-	slash: true,
+	type: CommandType.SLASH,
 	ownerOnly: true,
 	testOnly: true,
  
