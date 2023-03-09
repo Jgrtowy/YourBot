@@ -1,6 +1,5 @@
 const { CommandType } = require('wokcommands');
 module.exports = {
-     category: "main",
      description: "check the utc time, that's it",
      type: CommandType.SLASH,
      testOnly: true,

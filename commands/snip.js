@@ -2,7 +2,6 @@ const {CommandType} = require('wokcommands');
 const axios = require('axios');
 const { ApplicationCommandOptionType } = require('discord.js');
 module.exports = {
-     category: "Main",
      description: "Snip your url blazingly fast",
      type: CommandType.SLASH,
      testOnly: true,

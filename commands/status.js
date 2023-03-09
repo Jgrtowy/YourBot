@@ -1,7 +1,6 @@
 const { CommandType } = require("wokcommands");
 
 module.exports = {
-	category: "main",
 	description: "Change the bot status",
 	options: [
 	    {

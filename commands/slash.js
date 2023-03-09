@@ -16,25 +16,6 @@ module.exports = {
             name: 'list',
             description: 'Lists all the registered slash commands.',
         },
-        // RELOAD
-        // {
-        //     type: ApplicationCommandOptionType.Subcommand,
-        //     name: 'reload',
-        //     description: 'Reloads registered slash commands.',
-        //     options: [
-        //         {
-        //             type: ApplicationCommandOptionType.String,
-        //             name: 'scope',
-        //             description: 'Reloads all guild/global scoped commands.',
-        //             required: true,
-        //             choices: [
-        //                 { name: 'guild', value: 'guild' },
-        //                 { name: 'global', value: 'global' },
-        //                 { name: 'both', value: 'both' },
-        //             ],
-        //         },
-        //     ],
-        // },
         // YEET
         {
             type: ApplicationCommandOptionType.Subcommand,

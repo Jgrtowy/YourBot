@@ -37,6 +37,7 @@ client.on("ready", async () => {
   })
   try {
     client.user.setStatus('idle');
+    client.user.setActivity({ type: 0, url: "https://jgrtowy.xyz/", name: 'darksouls' })
   } catch (error) {
     console.log(error);
   }
