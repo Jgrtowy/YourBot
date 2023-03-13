@@ -1,3 +1,4 @@
+const startTime = performance.now();
 const path = require("path")
 const WOKCommands = require("wokcommands")
 const DiscordJS = require("discord.js")
@@ -186,4 +187,4 @@ client.on("messageCreate", async (message) => {
 
 
 client.login(process.env.TOKEN)
-console.log("🎉🎉🎉 Yo(ur) bot is now running!");
+console.log(`🎉🎉🎉 Yo(ur) bot is now running! Time: ${(performance.now() - startTime)/1000}s`);
