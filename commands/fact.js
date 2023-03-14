@@ -1,12 +1,14 @@
 const { CommandType } = require("wokcommands")
 const axios = require("axios")
-const { EmbedBuilder } = require("@discordjs/builders")
+const { EmbedBuilder } = require("discord.js")
+const sendError = require("../addons/sendError")
 module.exports = {
      description: "Get random useless fact",
      type: CommandType.SLASH,
      testOnly: true,
      callback: async ({ interaction }) => {
           try {
+               const startTime = performance.now();
                const request = await axios.get(
                     "https://uselessfacts.jsph.pl/api/v2/facts/random"
                )
@@ -14,6 +16,13 @@ module.exports = {
                const responseEmbed = new EmbedBuilder()
                     .setTitle(`Here's your random fact:`)
                     .setDescription(`> **${response.text}**`)
+                    .setFooter({
+                         text: `Request took: ${(
+                              (performance.now() - startTime) /
+                              1000
+                         ).toFixed(2)}s`,
+                    })
+                    .setColor('Random')
                if (interaction) {
                     interaction.reply({
                          embeds: [responseEmbed],
@@ -22,8 +31,10 @@ module.exports = {
           } catch (error) {
                if (interaction) {
                     interaction.reply({
-                         content: `> Something's failed... Try again later`,
+                         content: `> Error ocurred, please try again`,
+                         ephemeral: true
                     })
+                    sendError(error)
                }
           }
      },

@@ -1,6 +1,7 @@
 const { CommandType } = require("wokcommands")
 const axios = require("axios")
 const { ApplicationCommandOptionType, EmbedBuilder } = require("discord.js")
+const sendError = require("../addons/sendError")
 module.exports = {
      description: "Get picture of cute doggo",
      type: CommandType.SLASH,
@@ -26,28 +27,30 @@ module.exports = {
                          const embed = new EmbedBuilder()
                               .setTitle(`Here's great pic of doggo!`)
                               .setImage(image)
-                              .setFooter(
-                                   {text: `Request took: ${
-                                        ((performance.now() - startTime) / 1000).toFixed(2)
-                                   }s`}
-                              )
+                              .setFooter({
+                                   text: `Request took: ${(
+                                        (performance.now() - startTime) /
+                                        1000
+                                   ).toFixed(2)}s`,
+                              })
                          interaction.reply({
                               embeds: [embed],
                          })
                     } else {
                          const startTime = performance.now()
                          const request = await axios.get(
-                              `https://dog.ceo/api/breed/${(breed.toLowerCase())}/images/random`
+                              `https://dog.ceo/api/breed/${breed.toLowerCase()}/images/random`
                          )
                          const image = await request.data.message
                          const embed = new EmbedBuilder()
                               .setTitle(`Here's great pic of doggo!`)
                               .setImage(image)
-                              .setFooter(
-                                   {text: `Request took: ${
-                                        ((performance.now() - startTime) / 1000).toFixed(2)
-                                   }s`}
-                              )
+                              .setFooter({
+                                   text: `Request took: ${(
+                                        (performance.now() - startTime) /
+                                        1000
+                                   ).toFixed(2)}s`,
+                              })
                          interaction.reply({
                               embeds: [embed],
                          })
@@ -56,10 +59,11 @@ module.exports = {
           } catch (error) {
                if (interaction) {
                     interaction.reply({
-                         content: `> Something's failed... Try again later`,
+                         content: `> Error ocurred, please try again`,
+                         ephemeral: true,
                     })
+                    sendError(error)
                }
-               console.log(error)
           }
      },
 }
