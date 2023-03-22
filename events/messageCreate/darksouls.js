@@ -1,5 +1,5 @@
-const sendError = require('../../addons/sendError')
-const axios = require('axios')
+const sendError = require("../../addons/sendError")
+const axios = require("axios")
 
 module.exports = (message) => {
      if (message.content !== "darksouls" || message.author.bot) return
@@ -10,8 +10,9 @@ module.exports = (message) => {
           "Demon Souls?",
           "Literal Moses moment",
           "Code Vein",
-          "Tears of the Kingdom"
-     ]   
+          "Tears of the Kingdom",
+          "Bloodborne",
+     ]
      const startTime = performance.now()
      let endTime
      try {
@@ -48,6 +49,6 @@ module.exports = (message) => {
                     })
           }
      } catch (err) {
-          sendError(err);
+          sendError(err)
      }
 }
