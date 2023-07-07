@@ -1,4 +1,3 @@
-const startTime = performance.now();
 const path = require('path');
 const WOKCommands = require('wokcommands');
 const { Client, IntentsBitField, Partials } = require('discord.js');
@@ -6,6 +5,7 @@ const { performance } = require('perf_hooks');
 require('dotenv').config();
 const sendStartup = require('./addons/sendStartup');
 sendStartup(0, 0);
+const startTime = performance.now();
 
 const client = new Client({
     intents: [IntentsBitField.Flags.Guilds, IntentsBitField.Flags.GuildMessages, IntentsBitField.Flags.DirectMessages, IntentsBitField.Flags.MessageContent],
