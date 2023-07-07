@@ -14,4 +14,7 @@ pipeline {
       }
     }
   }
+  tools {
+    nodejs 'Node18'
+  }
 }
