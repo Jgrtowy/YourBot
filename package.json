@@ -7,6 +7,7 @@
     },
     "scripts": {
         "dev": "nodemon main.js",
+        "start": "pm2 start main.js --name YourBot",
         "commit": "git commit -a && git push -f"
     },
     "dependencies": {
