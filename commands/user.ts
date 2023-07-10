@@ -1,9 +1,11 @@
+import { CommandObject, CommandUsage } from 'wokcommands';
+
 const { CommandType } = require('wokcommands');
 const axios = require('axios');
 const sendError = require('../addons/sendError');
 const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
 
-module.exports = {
+export default {
     description: 'Get info about user',
     type: CommandType.SLASH,
     testOnly: true,
@@ -15,7 +17,7 @@ module.exports = {
             required: true,
         },
     ],
-    callback: async ({ interaction, args, message }) => {
+    callback: async ({ interaction, args }: CommandUsage) => {
         try {
             if (interaction) {
                 const userId = args[0];
@@ -39,7 +41,7 @@ module.exports = {
                             name: 'Roles',
                             value: member.roles.cache
 
-                                .map((role) => {
+                                .map((role: any) => {
                                     return role.name;
                                 })
                                 .join(', '),
@@ -61,7 +63,7 @@ module.exports = {
             }
         }
     },
-};
+} satisfies CommandObject;
 
 const convertDate = (date) => {
     const newDate = new Date(date);

@@ -1,8 +1,8 @@
-const { CommandType } = require('wokcommands');
-const axios = require('axios');
-const sendError = require('../addons/sendError');
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
-module.exports = {
+import axios from 'axios';
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js';
+import { CommandObject, CommandType, CommandUsage } from 'wokcommands';
+import sendError from '../addons/sendError';
+export default {
     description: 'Snip your url blazingly fast',
     type: CommandType.SLASH,
     testOnly: true,
@@ -20,10 +20,10 @@ module.exports = {
             required: false,
         },
     ],
-    callback: async ({ interaction, args }) => {
+    callback: async ({ interaction, args }: CommandUsage) => {
         try {
             if (interaction) {
-                const hiddenState = args[1] ?? 'false';
+                const hiddenState: string = args[1] ?? 'false';
                 if (!/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(args[0]) || /(?:https?:\/\/)?snip\.gay\/?.*/.test(args[0]))
                     return {
                         content: `> Your URL is invalid`,
@@ -31,7 +31,7 @@ module.exports = {
                     };
                 const request = await axios.post('https://snip.gay/api/new', { url: args[0] }, { headers: { 'Content-Type': 'application/json' } });
                 const embed = new EmbedBuilder().setTitle(`Here's your snipped URL!`).setDescription(`**${request.data.snipUrl}** created from \`${args[0]}\``).setColor('Random');
-                if (hiddenState == 'true') {
+                if (hiddenState === 'true') {
                     interaction.reply({
                         embeds: [embed],
                         ephemeral: true,
@@ -52,4 +52,4 @@ module.exports = {
             }
         }
     },
-};
+} satisfies CommandObject;

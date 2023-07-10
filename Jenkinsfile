@@ -2,16 +2,19 @@ pipeline {
   agent any
 
   stages {
-    stage('Build') {
+    stage('Installing dependencies') {
       steps {
         checkout scm
         sh 'npm install'
+        script{
+            currentBuild.result = 'SUCCESS'
+        }
       }
     }
-    stage('Deploy') {
-      steps {
-        sh 'npm start'
-      }
+    stage('Running the bot'){
+        steps{
+            sh 'node main.js'
+        }
     }
   }
   tools {

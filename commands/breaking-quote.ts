@@ -1,12 +1,12 @@
-const { CommandType } = require('wokcommands');
-const axios = require('axios');
-const { EmbedBuilder } = require('discord.js');
-const sendError = require('../addons/sendError');
-module.exports = {
+import axios from 'axios';
+import { EmbedBuilder } from 'discord.js';
+import { CommandObject, CommandType, CommandUsage } from 'wokcommands';
+import sendError from '../addons/sendError';
+export default {
     description: 'Get random quote from Breaking Bad',
     type: CommandType.SLASH,
     testOnly: true,
-    callback: async ({ interaction }) => {
+    callback: async ({ interaction }: CommandUsage) => {
         try {
             const request = await axios.get('https://api.breakingbadquotes.xyz/v1/quotes');
             const response = await request.data;
@@ -25,4 +25,4 @@ module.exports = {
             }
         }
     },
-};
+} as CommandObject;

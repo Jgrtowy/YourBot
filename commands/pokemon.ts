@@ -1,9 +1,9 @@
-const { CommandType } = require('wokcommands');
-const axios = require('axios');
-const sendError = require('../addons/sendError');
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
+import axios from 'axios';
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js';
+import { Command, CommandObject, CommandType, CommandUsage } from 'wokcommands';
+import sendError from '../addons/sendError';
 
-module.exports = {
+export default {
     description: 'Get info about pokemon',
     type: CommandType.SLASH,
     testOnly: true,
@@ -15,7 +15,7 @@ module.exports = {
             required: true,
         },
     ],
-    callback: async ({ interaction, args }) => {
+    callback: async ({ interaction, args }: CommandUsage) => {
         try {
             if (interaction) {
                 const request = await axios.get(`https://pokeapi.co/api/v2/pokemon/${args[0]}`);
@@ -62,8 +62,8 @@ module.exports = {
             }
         }
     },
-};
+} satisfies CommandObject;
 
-const capitalizeFirstLetter = (string) => {
+const capitalizeFirstLetter = (string: string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };

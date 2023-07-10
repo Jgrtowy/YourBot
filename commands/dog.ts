@@ -1,8 +1,8 @@
-const { CommandType } = require('wokcommands');
-const axios = require('axios');
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
-const sendError = require('../addons/sendError');
-module.exports = {
+import axios from 'axios';
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js';
+import { CommandObject, CommandType, CommandUsage } from 'wokcommands';
+import sendError from '../addons/sendError';
+export default {
     type: CommandType.SLASH,
     testOnly: true,
     description: 'Get picture of cute dog or see list of avaiable breeds',
@@ -21,24 +21,19 @@ module.exports = {
             ],
         },
         {
-            required: false,
             name: 'list',
             description: 'See list of all breeds avaiable',
             type: ApplicationCommandOptionType.Subcommand,
         },
     ],
-    callback: async ({ interaction }) => {
+    callback: async ({ interaction, args }: CommandUsage) => {
         try {
-            const command = interaction.options._subcommand;
-            const args = interaction.options._hoistedOptions;
-            switch (command) {
+            switch (interaction?.options.getSubcommand()) {
                 case 'list':
-                    const request = await axios.get('https://dog.ceo/api/breeds/list/all');
-                    const response = await request.data.message;
                     const embed = new EmbedBuilder().setTitle(`🚧 Command under construction`).setDescription(`
                               Meanwhile you can check the list here: <https://dog.ceo/api/breeds/list/all>.
                               If the dog has subname in it's name for example **"australian": ["shepherd"]** you should type the name like this: \`name/subname\` for example \`australian/shepherd\`
-                         `);
+                        `);
                     interaction.reply({
                         embeds: [embed],
                         ephemeral: true,
@@ -46,8 +41,9 @@ module.exports = {
                     break;
                 case 'picture':
                     if (interaction) {
-                        const breed = args[0]?.value || 0;
-                        if (breed === 0) {
+                        const breed = interaction.options.getString('breed');
+
+                        if (breed === 'undefined') {
                             const request = await axios.get('https://dog.ceo/api/breeds/image/random');
                             const image = await request.data.message;
                             const embed = new EmbedBuilder().setTitle(`Here's great pic of doggo!`).setImage(image);
@@ -75,4 +71,4 @@ module.exports = {
             }
         }
     },
-};
+} satisfies CommandObject;

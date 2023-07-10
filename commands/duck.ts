@@ -1,12 +1,12 @@
-const { CommandType } = require('wokcommands');
-const axios = require('axios');
-const sendError = require('../addons/sendError');
-const { EmbedBuilder } = require('discord.js');
-module.exports = {
+import axios from 'axios';
+import { EmbedBuilder } from 'discord.js';
+import { CommandObject, CommandType, CommandUsage } from 'wokcommands';
+import sendError from '../addons/sendError';
+export default {
     description: 'Get picture of a duck',
     type: CommandType.SLASH,
     testOnly: true,
-    callback: async ({ interaction }) => {
+    callback: async ({ interaction }: CommandUsage) => {
         try {
             const request = await axios({
                 method: 'get',
@@ -28,4 +28,4 @@ module.exports = {
             }
         }
     },
-};
+} satisfies CommandObject;
