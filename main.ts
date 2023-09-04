@@ -15,7 +15,7 @@ client.on('ready', () => {
     new WOK({
         client,
         commandsDir: path.join(__dirname, 'commands'),
-        testServers: ['980813190780841984', '1040650205202227261'],
+        testServers: ['980813190780841984', '1040650205202227261', '1137122349066498208'],
         botOwners: ['315531146953752578', '304961013202288651'],
         mongoUri: process.env.MONGO_URI || '',
         disabledDefaultCommands: [DefaultCommands.ChannelCommand, DefaultCommands.Prefix, DefaultCommands.RequiredPerrmissions, DefaultCommands.RequiredRoles, DefaultCommands.ToggleCommand],

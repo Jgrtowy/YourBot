@@ -20,7 +20,8 @@ export default {
                     \`/dog [breed]\` - get random picture of dog and you can even choose breed of it
                     \`/fact\` - get random fact you'll probably didn't know
                     \`/snip\` - snip your url blazingly fast using \`snip.gay\`
-
+                    \`/pokemon <id>\` - get info about pokemon by id
+                    \`/user <user>\` - get info about user
                `
                 )
                 .setColor('Random');

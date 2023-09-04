@@ -43,7 +43,7 @@ export default {
                     if (interaction) {
                         const breed = interaction.options.getString('breed');
 
-                        if (breed === 'undefined') {
+                        if (breed === null) {
                             const request = await axios.get('https://dog.ceo/api/breeds/image/random');
                             const image = await request.data.message;
                             const embed = new EmbedBuilder().setTitle(`Here's great pic of doggo!`).setImage(image);
