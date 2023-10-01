@@ -1,9 +1,7 @@
-import { Client, IntentsBitField, Partials } from 'discord.js';
+import { ActivityType, Client, IntentsBitField, Partials } from 'discord.js';
 import path from 'path';
 import WOK, { DefaultCommands } from 'wokcommands';
-import sendStartup from './addons/sendStartup';
 require('dotenv').config();
-sendStartup(0, 0);
 const startTime = performance.now();
 
 const client = new Client({
@@ -28,5 +26,4 @@ client.on('ready', () => {
 
 client.login(process.env.TOKEN);
 const finalTime = ((performance.now() - startTime) / 1000).toFixed(2);
-sendStartup(finalTime, 1);
 console.log(`🎉🎉🎉 Yo(ur) bot is now running! Time: ${finalTime}s`);
