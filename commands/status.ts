@@ -1,3 +1,4 @@
+import { ActivityOptions, ActivityType, ApplicationCommandOptionType, ClientPresence, ClientPresenceStatus, Presence, PresenceData, PresenceStatus, PresenceStatusData, PresenceUpdateStatus } from 'discord.js';
 import { CommandObject, CommandType, CommandUsage } from 'wokcommands';
 
 export default {
@@ -7,7 +8,7 @@ export default {
             name: 'type',
             description: 'Choose an activity type',
             required: true,
-            type: 3,
+            type: ApplicationCommandOptionType.String,
             choices: [
                 {
                     name: 'Playing',
@@ -15,49 +16,81 @@ export default {
                 },
                 {
                     name: 'Watching',
-                    value: '3',
-                },
-                {
-                    name: 'Streaming',
                     value: '1',
                 },
                 {
+                    name: 'Streaming',
+                    value: '2',
+                },
+                {
                     name: 'Competing in',
-                    value: '5',
+                    value: '3',
                 },
                 {
                     name: 'Listening to',
-                    value: '2',
+                    value: '5',
                 },
             ],
         },
         {
-            name: 'status',
-            description: 'Status',
+            name: 'what',
+            description: 'Description of the activity',
             required: true,
-            type: 3,
+            type: ApplicationCommandOptionType.String,
+        },
+        {
+            name: 'status',
+            description: 'Status of the bot',
+            required: false,
+            type: ApplicationCommandOptionType.String,
+            choices: [
+                {
+                    name: 'Online',
+                    value: 'online',
+                },
+                {
+                    name: 'Idle',
+                    value: 'idle',
+                },
+                {
+                    name: 'Do Not Disturb',
+                    value: 'dnd',
+                },
+                {
+                    name: 'Invisible',
+                    value: 'invisible',
+                },
+            ],
         },
     ],
     type: CommandType.SLASH,
     ownerOnly: true,
     testOnly: true,
 
-    callback: ({ client, interaction, args }: CommandUsage) => {
-        const type = Number(args[0]);
-        const activity = args[1];
-        const activities = {
-            0: 'Playing',
-            1: 'Streaming',
-            2: 'Listening to',
-            3: 'Watching',
-            5: 'Competing in',
+    callback: ({ client, interaction }: CommandUsage) => {
+        const statuses = {
+            online: 'online',
+            idle: 'idle',
+            dnd: 'dnd',
+            invisible: 'invisible',
         };
 
-        client.user.setActivity({ type, url: 'https://jgrtowy.xyz/', name: activity });
+        const type = Number(interaction.options.getString('type'));
+        const what = interaction.options.getString('what');
+        const status: PresenceStatusData = statuses[interaction.options.getString('status') || 'online'];
+
+        const activity = {
+            name: what,
+            type: type,
+            url: 'https://jgrtowy.xyz',
+        } satisfies ActivityOptions;
+
+        client.user.setActivity(activity);
+        client.user.setStatus(status);
 
         if (interaction) {
             interaction.reply({
-                content: `> Client presence set to "**${activities[type]} ${activity}**"`,
+                content: `> Client presence set`,
                 ephemeral: true,
             });
         }

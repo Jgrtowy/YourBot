@@ -1,7 +1,7 @@
 import { Message } from 'discord.js';
 
-const sendError = require('../../addons/sendError');
-const axios = require('axios');
+import axios from 'axios';
+import sendError from '../../addons/sendError';
 
 export default (message: Message) => {
     if (message.content !== 'darksouls' || message.author.bot) return;

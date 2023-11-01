@@ -1,9 +1,8 @@
 import { CommandObject, CommandUsage } from 'wokcommands';
 
-const { CommandType } = require('wokcommands');
-const axios = require('axios');
-const sendError = require('../addons/sendError');
-const { ApplicationCommandOptionType, EmbedBuilder } = require('discord.js');
+import { ApplicationCommandOptionType, EmbedBuilder } from 'discord.js';
+import { CommandType } from 'wokcommands';
+import sendError from '../addons/sendError';
 
 export default {
     description: 'Get info about user',

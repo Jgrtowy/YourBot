@@ -1,5 +1,5 @@
-const sendError = require('../addons/sendError');
-const { ActivityType } = require('discord.js');
+import { ActivityType } from 'discord.js';
+import sendError from '../addons/sendError';
 
 export default async (instance: any, client: any) => {
     try {
@@ -7,6 +7,7 @@ export default async (instance: any, client: any) => {
         client.user.setPresence({
             activities: [{ name: 'darksouls', type: ActivityType.Playing }],
         });
+        console.log('Presence is set!');
     } catch (error) {
         sendError(error);
     }

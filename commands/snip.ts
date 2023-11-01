@@ -23,7 +23,6 @@ export default {
     callback: async ({ interaction, args }: CommandUsage) => {
         try {
             if (interaction) {
-                const hiddenState: string = args[1] ?? 'false';
                 if (!/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(args[0]) || /(?:https?:\/\/)?snip\.gay\/?.*/.test(args[0]))
                     return {
                         content: `> Your URL is invalid`,
@@ -31,16 +30,10 @@ export default {
                     };
                 const request = await axios.post('https://snip.gay/api/new', { url: args[0] }, { headers: { 'Content-Type': 'application/json' } });
                 const embed = new EmbedBuilder().setTitle(`Here's your snipped URL!`).setDescription(`**${request.data.snipUrl}** created from \`${args[0]}\``).setColor('Random');
-                if (hiddenState === 'true') {
-                    interaction.reply({
-                        embeds: [embed],
-                        ephemeral: true,
-                    });
-                } else {
-                    interaction.reply({
-                        embeds: [embed],
-                    });
-                }
+                interaction.reply({
+                    embeds: [embed],
+                    ephemeral: interaction.options.getBoolean('hidden') ?? false,
+                });
             }
         } catch (error) {
             if (interaction) {
